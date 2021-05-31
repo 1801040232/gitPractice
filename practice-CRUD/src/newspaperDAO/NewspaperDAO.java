@@ -14,7 +14,7 @@ public class NewspaperDAO {
 
 	private static Connection conn = DBConnection.getConnection();
 
-	public static List<Newspaper> selectAllNewspapers() {
+	public List<Newspaper> selectAllNewspapers() {
 		List<Newspaper> list = new ArrayList();
 		try {
 			PreparedStatement ps = conn.prepareStatement("select * from newspaper;");
@@ -84,17 +84,17 @@ public class NewspaperDAO {
 		
 	}
 
-	public static void main(String[] args) {
-
-		Newspaper newspaper = new Newspaper("pqMinh", "Phạm Quang Minh");
-		System.out.println(insertNewspaper(newspaper));
-		Newspaper newspaper1 = new Newspaper(22, "pqTu", "Phạm Quang Tu");
-		System.out.println(updateNewspaper(newspaper1));
-		System.out.println(deleteNewspaper(23));
-		List list = selectAllNewspapers();
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
-	}
+//	public static void main(String[] args) {
+//
+//		Newspaper newspaper = new Newspaper("pqMinh", "Phạm Quang Minh");
+//		System.out.println(insertNewspaper(newspaper));
+//		Newspaper newspaper1 = new Newspaper(22, "pqTu", "Phạm Quang Tu");
+//		System.out.println(updateNewspaper(newspaper1));
+//		System.out.println(deleteNewspaper(23));
+//		List list = selectAllNewspapers();
+//		for (int i = 0; i < list.size(); i++) {
+//			System.out.println(list.get(i));
+//		}
+//	}
 
 }
