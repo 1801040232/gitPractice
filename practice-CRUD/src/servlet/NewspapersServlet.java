@@ -16,7 +16,7 @@ import newspaperDAO.NewspaperDAO;
 /**
  * Servlet implementation class NewspapersServlet
  */
-@WebServlet("/NewspapersServlet")
+@WebServlet("/")
 public class NewspapersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,6 @@ public class NewspapersServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		listNewspaper(request, response);
 	}
 
