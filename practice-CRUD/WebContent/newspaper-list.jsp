@@ -21,8 +21,34 @@
 				<td><c:out value="${n.id}" /></td>
 				<td><c:out value="${n.title}" /></td>
 				<td><c:out value="${n.content}" /></td>
+				<td>
+				<a href="delete?id=<c:out value='${n.id}' />">Delete</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
+
+	<br>
+
+
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>title</th>
+			<th>content</th>
+		</tr>
+
+		<c:forEach var="n" items="${list}">
+			<tr>
+				<td><c:out value="${n.id}" /></td>
+				<td><c:out value="${n.title}" /></td>
+				<td><c:out value="${n.content}" /></td>
+			</tr>
+		</c:forEach>
+	</table>
+
+
+
+
 </body>
 </html>

@@ -13,6 +13,14 @@ import model.Newspaper;
 public class NewspaperDAO {
 
 	private static Connection conn = DBConnection.getConnection();
+	private static NewspaperDAO instance;
+
+	public static NewspaperDAO getInstance() {
+		if (instance == null) {
+			instance = new NewspaperDAO();
+		}
+		return instance;
+	}
 
 	public List<Newspaper> selectAllNewspapers() {
 		List<Newspaper> list = new ArrayList();
@@ -33,7 +41,7 @@ public class NewspaperDAO {
 		return list;
 	}
 
-	public static boolean insertNewspaper(Newspaper newspaper) {
+	public boolean insertNewspaper(Newspaper newspaper) {
 		boolean rowCreated = false;
 		String insertNewspaper = "insert into newspaper(title, content) values(?, ?);";
 		try {
@@ -49,8 +57,8 @@ public class NewspaperDAO {
 
 		return rowCreated;
 	}
-	
-	public static boolean updateNewspaper(Newspaper newspaper) {
+
+	public boolean updateNewspaper(Newspaper newspaper) {
 		boolean rowUpdated = false;
 		String updateNewspaper = "update newspaper set title = ?, content = ? where id = ?";
 		PreparedStatement ps;
@@ -66,10 +74,10 @@ public class NewspaperDAO {
 		}
 		return rowUpdated;
 	}
-	
-	public static boolean deleteNewspaper(int id) {
+
+	public boolean deleteNewspaper(int id) {
 		boolean rowDeleted = false;
-		
+
 		String DELETE_NEWSPAPER = "DELETE FROM NEWSPAPER WHERE id = ?";
 		PreparedStatement ps;
 		try {
@@ -79,13 +87,12 @@ public class NewspaperDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 		return rowDeleted;
-		
+
 	}
 
 //	public static void main(String[] args) {
-//
 //		Newspaper newspaper = new Newspaper("pqMinh", "Phạm Quang Minh");
 //		System.out.println(insertNewspaper(newspaper));
 //		Newspaper newspaper1 = new Newspaper(22, "pqTu", "Phạm Quang Tu");

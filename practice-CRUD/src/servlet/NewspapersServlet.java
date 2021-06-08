@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -40,7 +41,25 @@ public class NewspapersServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		listNewspaper(request, response);
+		String action = request.getServletPath();
+		try {
+			switch (action) {
+			case "/delete":
+
+				deleteNewspaper(request, response);
+
+				break;
+			default:
+				listNewspaper(request, response);
+				break;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -59,6 +78,13 @@ public class NewspapersServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("newspaper-list.jsp");
 		dispatcher.forward(request, response);
+	}
+
+	private void deleteNewspaper(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		newspaperDAO.deleteNewspaper(id);
+		response.sendRedirect("list");
 	}
 
 }
