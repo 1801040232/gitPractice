@@ -84,7 +84,7 @@ public class NewspapersServlet extends HttpServlet {
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		newspaperDAO.deleteNewspaper(id);
-		response.sendRedirect("list");
+		response.sendRedirect("list"); 
 	}
 
 }
