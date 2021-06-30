@@ -10,7 +10,10 @@
 <title>Newspaper List</title>
 </head>
 <body>
-	<table>
+	<jsp:include page="nav-bar.jsp"></jsp:include>
+	<br>
+
+	<table border="1">
 		<tr>
 			<th>id</th>
 			<th>title</th>
@@ -22,76 +25,9 @@
 				<td><c:out value="${n.title}" /></td>
 				<td><c:out value="${n.content}" /></td>
 				<td><a href="delete?id=<c:out value='${n.id}' />">Delete</a></td>
+				<td><a href="edit?id=<c:out value='${n.id}' />">Edit</a></td>
 			</tr>
 		</c:forEach>
 	</table>
-
-	<br>
-
-
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>title</th>
-			<th>content</th>
-		</tr>
-
-		<c:forEach var="n" items="${list}">
-			<tr>
-				<td><c:out value="${n.id}" /></td>
-				<td><c:out value="${n.title}" /></td>
-				<td><c:out value="${n.content}" /></td>
-			</tr>
-		</c:forEach>
-	</table>
-
-
-
-
-
-
-
-	<br>
-
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>title</th>
-			<th>content</th>
-		</tr>
-
-		<c:forEach var="n" items="${list }">
-			<tr>
-				<td><c:out value="${n.id}" /></td>
-				<td><c:out value="${n.title}" /></td>
-				<td><c:out value="${n.content}" /></td>
-				<td><a href="delete?id=<c:out value="${n.id}" />">Delete</a></td>
-			</tr>
-		</c:forEach>
-
-	</table>
-
-<br>
-<br>
-
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>title</th>
-			<th>content</th>
-		</tr>
-
-		<c:forEach var="n" items="${list}">
-			<tr>
-				<td><c:out value="${n.id}" /></td>
-				<td><c:out value="${n.title}" /></td>
-				<td><c:out value="${n.content}" /></td>
-				<td><a href="delete?id=<c:out value="n.id" />">Deleteee</a></td>
-			</tr>
-		</c:forEach>
-	</table>
-
-
-
 </body>
 </html>

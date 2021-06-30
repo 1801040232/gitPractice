@@ -92,6 +92,24 @@ public class NewspaperDAO {
 
 	}
 
+	public Newspaper selectNewspaper(int id) {
+		Newspaper newspaper = null;
+		try {
+			String SELECT_NEWSPAPER_BY_ID = "SELECT * FROM newspaper WHERE id = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(SELECT_NEWSPAPER_BY_ID);
+			preparedStatement.setInt(1, id);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				newspaper = new Newspaper(id, title, content);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return newspaper;
+	}
+
 //	public static void main(String[] args) {
 //		Newspaper newspaper = new Newspaper("pqMinh", "Phạm Quang Minh");
 //		System.out.println(insertNewspaper(newspaper));

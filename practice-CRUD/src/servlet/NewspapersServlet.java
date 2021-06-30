@@ -44,10 +44,20 @@ public class NewspapersServlet extends HttpServlet {
 		String action = request.getServletPath();
 		try {
 			switch (action) {
+			case "/new":
+				showNewForm(request, response);
+				break;
+			case "/insert":
+				insertNewspaper(request, response);
+				break;
 			case "/delete":
-
 				deleteNewspaper(request, response);
-
+				break;
+			case "/edit":
+				showEditForm(request, response);
+				break;
+			case "/update":
+				updateNewspaper(request, response);
 				break;
 			default:
 				listNewspaper(request, response);
@@ -84,7 +94,41 @@ public class NewspapersServlet extends HttpServlet {
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		newspaperDAO.deleteNewspaper(id);
-		response.sendRedirect("list"); 
+		response.sendRedirect("list");
+	}
+
+	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("add-newspaper.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void insertNewspaper(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		newspaperDAO.insertNewspaper(new Newspaper(title, content));
+		response.sendRedirect("list");
+	}
+
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Newspaper existingNewspaper = newspaperDAO.selectNewspaper(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("edit-newspaper.jsp");
+		request.setAttribute("newspaper", existingNewspaper);
+		dispatcher.forward(request, response);
+	}
+
+	private void updateNewspaper(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+
+		Newspaper newspaper = new Newspaper(id, title, content);
+		newspaperDAO.updateNewspaper(newspaper);
+		response.sendRedirect("list");
 	}
 
 }
